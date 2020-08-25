@@ -44,9 +44,40 @@ class _BlockInputState extends State<BlockInput> {
   void initState() {
     super.initState();
     for(int i = 0; i < _inputSize; i++) {
-      _controllerList.add(TextEditingController());
-      _focusControllerList.add(FocusNode());
-      _charInputList.add(CharacterInput());
+      TextEditingController textController = TextEditingController();
+      FocusNode focusNode = FocusNode();
+      Function fx = (value) {};
+
+      if(i == 0) {
+        fx = (value) {
+          if(value.length == 1) {
+            FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
+          }
+        };
+      } else if(i == _inputSize - 1) {
+        fx = (value) {
+          if(value.length == 0) {
+            FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
+          }
+        };
+      } else {
+        fx = (value) {
+          if(value.length == 1) {
+            FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
+          } else if(value.length == 0) {
+            FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
+          }
+        };
+      }
+
+      _charInputList.add(CharacterInput(
+        textController: textController,
+        focusNode: focusNode,
+        onChange: fx,
+      ));
+
+      _controllerList.add(textController);
+      _focusControllerList.add(focusNode);
     }
   }
 
@@ -61,11 +92,19 @@ class _BlockInputState extends State<BlockInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-
-      ],
+    return Container(
+      child: Column(
+        children: [
+          Row(children: _charInputList,),
+          buildErrorMessage(),
+        ],
+      ),
     );
+  }
+
+  Widget buildErrorMessage() {
+    if(errorMessage == null) return SizedBox();
+    return Text(errorMessage, style: TextStyle(),);
   }
 
 }
