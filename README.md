@@ -6,7 +6,7 @@
 Simple character blocked input that usually used for redeem code or validation code input.
 
 ## Gallery
-<img src="https://github.com/vonqo/block_input/tree/master/example/example-1.gif">
+<img src="https://raw.githubusercontent.com/vonqo/block_input/master/example/example-1.gif">
 
 ## Usage
 ```dart
