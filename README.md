@@ -1,7 +1,7 @@
 # Block Input 
 
 ![build](https://github.com/vonqo/block_input/workflows/build/badge.svg) 
-[![pub package](https://img.shields.io/pub/v/block_input.svg)](https://pub.dartlang.org/packages/geolocator)
+[![pub package](https://img.shields.io/pub/v/block_input.svg)](https://pub.dev/packages/block_input)
 
 Simple character blocked input that usually used for redeem code or validation code input.
 
