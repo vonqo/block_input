@@ -22,28 +22,22 @@ class CharacterInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.black12,
-          borderRadius: blockInputStyle.borderRadius
+          color: blockInputStyle.backgroundColor,
+          borderRadius: blockInputStyle.border.borderRadius
       ),
-      width: 42,
+      width: blockInputStyle.width,
       child: TextFormField(
         textAlign: TextAlign.center,
         obscureText: false,
-        style: TextStyle(fontSize: 19, color: Colors.black),
+        style: TextStyle(fontSize: blockInputStyle.fontSize, color: blockInputStyle.fontColor),
         maxLength: 1,
         enabled: true,
         decoration: InputDecoration(
           counterText: '',
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: blockInputStyle.padding,
           border: InputBorder.none,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            borderSide: BorderSide(color: Theme.of(context).canvasColor, width: 2.0),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            borderSide: BorderSide(color: Theme.of(context).accentColor, width: 2.0),
-          ),
+          enabledBorder: blockInputStyle.border,
+          focusedBorder: blockInputStyle.focusedBorder,
         ),
         controller: textController,
         focusNode: focusNode,

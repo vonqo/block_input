@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba27f609-0ccb-4aa4-8efe-fe8265a44c96" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/block_input_keyboard_type.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/block_input_style.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/block_input_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/block_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/block_input_keyboard_type.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input_keyboard_type.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/block_input_style.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input_style.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/input/character_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/input/character_input.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +24,7 @@
   <component name="ProjectId" id="1gZZSZz0xAjEl66C6xqrGXw2VDG" />
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>

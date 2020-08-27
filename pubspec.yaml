@@ -1,8 +1,8 @@
 name: block_input
-description: A new flutter plugin project.
+description: Simple character block input.
 version: 0.0.1
-author:
-homepage:
+author: vonqo
+homepage: https://github.com/vonqo/block_input
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

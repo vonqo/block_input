@@ -1,6 +1,7 @@
 
 import 'dart:async';
 
+import 'package:block_input/block_input_controller.dart';
 import 'package:block_input/block_input_style.dart';
 import 'package:block_input/input/character_input.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class BlockInput extends StatefulWidget {
 
   final int inputSize;
   final String errorMessage;
+  final TextStyle errorMessageStyle;
+  final BlockInputController blockInputController;
   final BlockInputKeyboardType blockInputKeyboardType;
   final BlockInputStyle blockInputStyle;
 
@@ -28,7 +31,9 @@ class BlockInput extends StatefulWidget {
     this.inputSize = 4,
     this.errorMessage,
     this.blockInputKeyboardType = BlockInputKeyboardType.text,
-    this.blockInputStyle
+    this.blockInputStyle,
+    this.errorMessageStyle,
+    this.blockInputController,
   }) : super(key: key);
 
   @override
@@ -36,8 +41,10 @@ class BlockInput extends StatefulWidget {
     return _BlockInputState(
       inputSize: inputSize,
       errorMessage: errorMessage,
+      errorMessageStyle: errorMessageStyle,
       blockInputKeyboardType: blockInputKeyboardType,
-      blockInputStyle: blockInputStyle
+      blockInputStyle: blockInputStyle,
+      blockInputController: blockInputController,
     );
   }
 }
@@ -46,8 +53,10 @@ class _BlockInputState extends State<BlockInput> {
 
   final int inputSize;
   final String errorMessage;
+  final TextStyle errorMessageStyle;
   final BlockInputKeyboardType blockInputKeyboardType;
   final BlockInputStyle blockInputStyle;
+  final BlockInputController blockInputController;
   List<TextEditingController> _controllerList = List<TextEditingController>();
   List<FocusNode> _focusControllerList = List<FocusNode>();
   List<CharacterInput> _charInputList = List<CharacterInput>();
@@ -56,7 +65,9 @@ class _BlockInputState extends State<BlockInput> {
     @required this.inputSize,
     @required this.errorMessage,
     @required this.blockInputKeyboardType,
-    @required this.blockInputStyle
+    @required this.blockInputStyle,
+    this.blockInputController,
+    this.errorMessageStyle,
   });
 
   @override
@@ -98,6 +109,7 @@ class _BlockInputState extends State<BlockInput> {
         focusNode: focusNode,
         onChange: fx,
         keyboardType: textInputType,
+        blockInputStyle: blockInputStyle,
       ));
 
       _controllerList.add(textController);
@@ -119,7 +131,11 @@ class _BlockInputState extends State<BlockInput> {
     return Container(
       child: Column(
         children: [
-          Row(children: _charInputList,),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: _charInputList,
+          ),
           buildErrorMessage(),
         ],
       ),
@@ -128,7 +144,7 @@ class _BlockInputState extends State<BlockInput> {
 
   Widget buildErrorMessage() {
     if(errorMessage == null) return SizedBox();
-    return Text(errorMessage, style: TextStyle(),);
+    return Text(errorMessage, style: errorMessageStyle,);
   }
 
 }
