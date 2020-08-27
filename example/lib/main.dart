@@ -37,8 +37,18 @@ class _MyAppState extends State<MyApp> {
         body: Container(
           padding: EdgeInsets.all(10),
           child: BlockInput(
-            blockInputKeyboardType: BlockInputKeyboardType.text,
-            blockInputStyle: BlockInputStyle(backgroundColor: Colors.white),
+            blockInputKeyboardType: BlockInputKeyboardType.number,
+            blockInputStyle: BlockInputStyle(
+              backgroundColor: Colors.black12,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.deepOrange, width: 1)
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(color: Colors.blueAccent, width: 2)
+              )
+            ),
             inputSize: 6,
           ),
         )
