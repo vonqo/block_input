@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba27f609-0ccb-4aa4-8efe-fe8265a44c96" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/block_input_keyboard_type.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/block_input_style.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/block_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/input/character_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/input/character_input.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +25,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/lib/input" />
     </key>
   </component>
@@ -55,7 +59,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

@@ -1,3 +1,4 @@
+import 'package:block_input/block_input_style.dart';
 import 'package:flutter/material.dart';
 
 class CharacterInput extends StatelessWidget {
@@ -6,13 +7,15 @@ class CharacterInput extends StatelessWidget {
   final TextEditingController textController;
   final FocusNode focusNode;
   final Function onChange;
+  final BlockInputStyle blockInputStyle;
 
   const CharacterInput({
     Key key,
-    this.keyboardType,
-    this.textController,
-    this.focusNode,
-    this.onChange
+    @required this.keyboardType,
+    @required this.textController,
+    @required this.focusNode,
+    @required this.onChange,
+    @required this.blockInputStyle
   }) : super(key: key);
 
   @override
@@ -20,7 +23,7 @@ class CharacterInput extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Colors.black12,
-          borderRadius: BorderRadius.all(Radius.circular(8))
+          borderRadius: blockInputStyle.borderRadius
       ),
       width: 42,
       child: TextFormField(

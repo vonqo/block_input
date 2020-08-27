@@ -1,9 +1,12 @@
 
 import 'dart:async';
 
+import 'package:block_input/block_input_style.dart';
 import 'package:block_input/input/character_input.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'block_input_keyboard_type.dart';
 
 class BlockInput extends StatefulWidget {
 
@@ -17,33 +20,49 @@ class BlockInput extends StatefulWidget {
 
   final int inputSize;
   final String errorMessage;
+  final BlockInputKeyboardType blockInputKeyboardType;
+  final BlockInputStyle blockInputStyle;
 
   const BlockInput({
     Key key,
     this.inputSize = 4,
-    this.errorMessage
+    this.errorMessage,
+    this.blockInputKeyboardType = BlockInputKeyboardType.text,
+    this.blockInputStyle
   }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _BlockInputState(inputSize, errorMessage);
+    return _BlockInputState(
+      inputSize: inputSize,
+      errorMessage: errorMessage,
+      blockInputKeyboardType: blockInputKeyboardType,
+      blockInputStyle: blockInputStyle
+    );
   }
 }
 
 class _BlockInputState extends State<BlockInput> {
 
-  final int _inputSize;
+  final int inputSize;
   final String errorMessage;
+  final BlockInputKeyboardType blockInputKeyboardType;
+  final BlockInputStyle blockInputStyle;
   List<TextEditingController> _controllerList = List<TextEditingController>();
   List<FocusNode> _focusControllerList = List<FocusNode>();
   List<CharacterInput> _charInputList = List<CharacterInput>();
 
-  _BlockInputState(this._inputSize, this.errorMessage);
+  _BlockInputState({
+    @required this.inputSize,
+    @required this.errorMessage,
+    @required this.blockInputKeyboardType,
+    @required this.blockInputStyle
+  });
 
   @override
   void initState() {
     super.initState();
-    for(int i = 0; i < _inputSize; i++) {
+    for(int i = 0; i < inputSize; i++) {
       TextEditingController textController = TextEditingController();
       FocusNode focusNode = FocusNode();
       Function fx = (value) {};
@@ -54,7 +73,7 @@ class _BlockInputState extends State<BlockInput> {
             FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
           }
         };
-      } else if(i == _inputSize - 1) {
+      } else if(i == inputSize - 1) {
         fx = (value) {
           if(value.length == 0) {
             FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
@@ -70,10 +89,15 @@ class _BlockInputState extends State<BlockInput> {
         };
       }
 
+      TextInputType textInputType =
+        (blockInputKeyboardType == BlockInputKeyboardType.text) ? TextInputType.text :
+        (blockInputKeyboardType == BlockInputKeyboardType.number) ? TextInputType.number : TextInputType.text;
+
       _charInputList.add(CharacterInput(
         textController: textController,
         focusNode: focusNode,
         onChange: fx,
+        keyboardType: textInputType,
       ));
 
       _controllerList.add(textController);
@@ -83,7 +107,7 @@ class _BlockInputState extends State<BlockInput> {
 
   @override
   void dispose() {
-    for(int i = 0; i < _inputSize; i++) {
+    for(int i = 0; i < inputSize; i++) {
       _controllerList[i]?.dispose();
       _focusControllerList[i]?.dispose();
     }
