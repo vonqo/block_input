@@ -10,19 +10,12 @@ import 'block_input_keyboard_type.dart';
 
 class BlockInput extends StatefulWidget {
 
-//  static const MethodChannel _channel =
-//      const MethodChannel('block_input');
-//
-//  static Future<String> get platformVersion async {
-//    final String version = await _channel.invokeMethod('getPlatformVersion');
-//    return version;
-//  }
-
   final String errorMessage;
   final TextStyle errorMessageStyle;
   final BlockInputController blockInputController;
   final BlockInputKeyboardType blockInputKeyboardType;
   final BlockInputStyle blockInputStyle;
+  final MainAxisAlignment axisAlignment;
 
   const BlockInput({
     Key key,
@@ -31,6 +24,7 @@ class BlockInput extends StatefulWidget {
     this.blockInputStyle,
     this.errorMessageStyle,
     this.blockInputController,
+    this.axisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
 
   @override
@@ -41,6 +35,7 @@ class BlockInput extends StatefulWidget {
       blockInputKeyboardType: blockInputKeyboardType,
       blockInputStyle: blockInputStyle,
       blockInputController: (blockInputController == null) ? BlockInputController(4) : blockInputController,
+      axisAlignment: axisAlignment
     );
   }
 }
@@ -52,6 +47,7 @@ class _BlockInputState extends State<BlockInput> {
   final BlockInputKeyboardType blockInputKeyboardType;
   final BlockInputStyle blockInputStyle;
   final BlockInputController blockInputController;
+  final MainAxisAlignment axisAlignment;
 
   List<TextEditingController> _controllerList = List<TextEditingController>();
   List<FocusNode> _focusControllerList = List<FocusNode>();
@@ -63,6 +59,7 @@ class _BlockInputState extends State<BlockInput> {
     @required this.blockInputStyle,
     this.blockInputController,
     this.errorMessageStyle,
+    this.axisAlignment,
   });
 
   @override
@@ -84,8 +81,6 @@ class _BlockInputState extends State<BlockInput> {
         FocusScope.of(context).requestFocus(_focusControllerList[textValue.length-1]);
       }
     });
-
-    // blockInputController.notifyListeners();
 
     for(int i = 0; i < blockInputController.size; i++) {
       TextEditingController textController = TextEditingController();
@@ -158,7 +153,7 @@ class _BlockInputState extends State<BlockInput> {
         children: [
           Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: axisAlignment,
             children: _charInputList,
           ),
           buildErrorMessage(),

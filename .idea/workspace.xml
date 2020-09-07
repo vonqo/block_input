@@ -6,8 +6,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/block_input_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/block_input_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/block_input_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/block_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

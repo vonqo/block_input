@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
               child: BlockInput(
                 blockInputController: blockInputController,
                 blockInputKeyboardType: BlockInputKeyboardType.number,
+                axisAlignment: MainAxisAlignment.spaceBetween,
                 blockInputStyle: BlockInputStyle(
                     backgroundColor: Colors.black12,
                     border: OutlineInputBorder(
