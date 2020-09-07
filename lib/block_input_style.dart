@@ -5,18 +5,16 @@ import 'package:flutter/material.dart';
 class BlockInputStyle with Diagnosticable {
 
   final Color backgroundColor;
-  final Color fontColor;
   final OutlineInputBorder border;
   final OutlineInputBorder focusedBorder;
   final EdgeInsets padding;
   final EdgeInsets margin;
-  final double fontSize;
+  final TextStyle textStyle;
   final double width;
   final bool isExtended;
 
   BlockInputStyle({
     this.backgroundColor = Colors.white,
-    this.fontColor = Colors.black87,
     this.padding = const EdgeInsets.all(10),
     this.margin = const EdgeInsets.all(5),
     this.isExtended = false,
@@ -28,7 +26,9 @@ class BlockInputStyle with Diagnosticable {
       borderRadius: BorderRadius.all(Radius.circular(8)),
       borderSide: BorderSide(color: Colors.black, width: 2.0),
     ),
-    this.fontSize = 19,
+    this.textStyle = const TextStyle(
+      fontSize: 19
+    ),
     this.width = 42
   });
 

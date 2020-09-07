@@ -29,7 +29,7 @@ class CharacterInput extends StatelessWidget {
       child: TextFormField(
         textAlign: TextAlign.center,
         obscureText: false,
-        style: TextStyle(fontSize: blockInputStyle.fontSize, color: blockInputStyle.fontColor),
+        style: blockInputStyle.textStyle,
         maxLength: 1,
         enabled: true,
         decoration: InputDecoration(

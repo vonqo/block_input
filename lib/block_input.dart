@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:block_input/block_input_controller.dart';
@@ -19,7 +18,6 @@ class BlockInput extends StatefulWidget {
 //    return version;
 //  }
 
-  final int inputSize;
   final String errorMessage;
   final TextStyle errorMessageStyle;
   final BlockInputController blockInputController;
@@ -28,7 +26,6 @@ class BlockInput extends StatefulWidget {
 
   const BlockInput({
     Key key,
-    this.inputSize = 4,
     this.errorMessage,
     this.blockInputKeyboardType = BlockInputKeyboardType.text,
     this.blockInputStyle,
@@ -39,30 +36,28 @@ class BlockInput extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _BlockInputState(
-      inputSize: inputSize,
       errorMessage: errorMessage,
       errorMessageStyle: errorMessageStyle,
       blockInputKeyboardType: blockInputKeyboardType,
       blockInputStyle: blockInputStyle,
-      blockInputController: blockInputController,
+      blockInputController: (blockInputController == null) ? BlockInputController(4) : blockInputController,
     );
   }
 }
 
 class _BlockInputState extends State<BlockInput> {
 
-  final int inputSize;
   final String errorMessage;
   final TextStyle errorMessageStyle;
   final BlockInputKeyboardType blockInputKeyboardType;
   final BlockInputStyle blockInputStyle;
   final BlockInputController blockInputController;
+
   List<TextEditingController> _controllerList = List<TextEditingController>();
   List<FocusNode> _focusControllerList = List<FocusNode>();
   List<CharacterInput> _charInputList = List<CharacterInput>();
 
   _BlockInputState({
-    @required this.inputSize,
     @required this.errorMessage,
     @required this.blockInputKeyboardType,
     @required this.blockInputStyle,
@@ -73,25 +68,47 @@ class _BlockInputState extends State<BlockInput> {
   @override
   void initState() {
     super.initState();
-    for(int i = 0; i < inputSize; i++) {
+
+    blockInputController.addListener(() {
+      String textValue = blockInputController.text;
+      for(int i = 0; i < _controllerList.length; i++) {
+        if(textValue.length > i) {
+          _controllerList[i].text = blockInputController.text[i];
+        } else {
+          _controllerList[i].text = '';
+        }
+      }
+      if(textValue.length == 0) {
+        FocusScope.of(context).requestFocus(_focusControllerList[0]);
+      } else {
+        FocusScope.of(context).requestFocus(_focusControllerList[textValue.length-1]);
+      }
+    });
+
+    // blockInputController.notifyListeners();
+
+    for(int i = 0; i < blockInputController.size; i++) {
       TextEditingController textController = TextEditingController();
       FocusNode focusNode = FocusNode();
       Function fx = (value) {};
 
       if(i == 0) {
         fx = (value) {
+          blockInputController.text = _getText();
           if(value.length == 1) {
             FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
           }
         };
-      } else if(i == inputSize - 1) {
+      } else if(i == blockInputController.size - 1) {
         fx = (value) {
+          blockInputController.text = _getText();
           if(value.length == 0) {
             FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
           }
         };
       } else {
         fx = (value) {
+          blockInputController.text = _getText();
           if(value.length == 1) {
             FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
           } else if(value.length == 0) {
@@ -119,11 +136,19 @@ class _BlockInputState extends State<BlockInput> {
 
   @override
   void dispose() {
-    for(int i = 0; i < inputSize; i++) {
+    for(int i = 0; i < blockInputController.size; i++) {
       _controllerList[i]?.dispose();
       _focusControllerList[i]?.dispose();
     }
     super.dispose();
+  }
+
+  String _getText() {
+    StringBuffer strBuffer = StringBuffer();
+    for(TextEditingController controller in _controllerList) {
+      strBuffer.write(controller.text);
+    }
+    return strBuffer.toString();
   }
 
   @override
