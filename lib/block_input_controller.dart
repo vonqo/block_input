@@ -11,6 +11,9 @@ class BlockInputController extends ValueNotifier<BlockEditingValue> {
   String get text => value.text;
 
   set text(String newText) {
+    if(newText.length > size) {
+      throw RangeError('Input size exceeded');
+    }
     value = value.copyWith(text: newText);
   }
 

@@ -34,6 +34,7 @@ blockInputController.dispose();
 @override
 Widget build(BuildContext context) {
   return BlockInput(
+     blockInputController: blockInputController,
      blockInputKeyboardType: BlockInputKeyboardType.number,
      blockInputStyle: BlockInputStyle(
        backgroundColor: Colors.black12,

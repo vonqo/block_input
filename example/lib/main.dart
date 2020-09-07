@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                   RaisedButton(
                     child: Text('TEST'),
                     onPressed: () {
-                      blockInputController.text = 'MARA';
+                      blockInputController.text = 'MARAAAAAAA';
                     },
                   )
                 ],
