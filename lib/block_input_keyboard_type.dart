@@ -18,6 +18,4 @@ class BlockInputKeyboardType with Diagnosticable {
     'text', 'number'
   ];
 
-  String get _name => 'BlockInputKeyboardType.${_names[index]}';
-
 }

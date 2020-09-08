@@ -8,8 +8,35 @@ Simple character blocked input that usually used for redeem code or validation c
 ## Gallery
 <img src="https://raw.githubusercontent.com/vonqo/block_input/master/example/example-1.gif">
 
-## Usage
-### Controller and Listener
+### Example
+
+Full [example](https://pub.dev/packages/block_input/example)
+
+```dart
+import 'package:block_input/block_input.dart';
+```
+
+```dart
+BlockInput(
+  blockInputController: blockInputController,
+  blockInputKeyboardType: BlockInputKeyboardType.number, // Number or Text
+  axisAlignment: MainAxisAlignment.spaceBetween, // Same as Row/Column MainAxisAlignment
+  blockInputStyle: BlockInputStyle(
+    backgroundColor: Colors.black12, // Color
+    border: OutlineInputBorder( // Same as InputDecoration border
+         borderRadius: BorderRadius.all(Radius.circular(10)),
+         borderSide: BorderSide(color: Colors.deepOrange, width: 1)
+    ),
+    focusedBorder: OutlineInputBorder( // Same as InputDecoration border
+         borderRadius: BorderRadius.all(Radius.circular(10)),
+         borderSide: BorderSide(color: Colors.blueAccent, width: 2)
+    )
+  )
+)
+```
+
+## Controller and Listener
+
 Controller is almost same as classic TextEditingController :D
 ```dart
 // Initializing controller
@@ -32,28 +59,31 @@ blockInputController.clear(); // clear
 blockInputController.dispose();
 ```
 
-### Widget
-BlockInput is wrapped inside a Row widget.
-```dart
-BlockInput(
-  blockInputController: blockInputController,
-  blockInputKeyboardType: BlockInputKeyboardType.number, // Number or Text
-  axisAlignment: MainAxisAlignment.spaceBetween, // Same as Row/Column MainAxisAlignment
-  blockInputStyle: BlockInputStyle(
-    backgroundColor: Colors.black12, // Color
-    border: OutlineInputBorder( // Same as InputDecoration border
-         borderRadius: BorderRadius.all(Radius.circular(10)),
-         borderSide: BorderSide(color: Colors.deepOrange, width: 1)
-    ),
-    focusedBorder: OutlineInputBorder( // Same as InputDecoration border
-         borderRadius: BorderRadius.all(Radius.circular(10)),
-         borderSide: BorderSide(color: Colors.blueAccent, width: 2)
-    )
-  ),  
-```
+## Attributes
+### BlockInput
+| Attribute              | Type                   |
+|------------------------|------------------------|
+| blockInputKeyboardType | BlockInputController   |
+| blockInputKeyboardType | BlockInputKeyboardType |
+| blockInputStyle        | BlockInputStyle        |
+| errorMessage           | String                 |
+| errorMessageStyle      | TextStyle              |
+| axisAlignment          | MainAxisAlignment      |
+
+### BlockInputStyle
+| Attribute      | Type               |
+|-----------------|--------------------|
+| backgroundColor | Color              |
+| border          | OutlineInputBorder |
+| focusedBorder   | OutlineInputBorder |
+| padding         | EdgeInsets         |
+| width           | double             |
+| textStyle       | TextStyle          |
 
 ## Licence
-Apache License version 2.0. - Enkh-Amar.G
+**Apache License version 2.0**
+
+Enkh-Amar.G // vonqo
 
 
 

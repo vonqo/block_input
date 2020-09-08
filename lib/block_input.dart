@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:block_input/block_input_controller.dart';
 import 'package:block_input/block_input_style.dart';
 import 'package:block_input/input/character_input.dart';
