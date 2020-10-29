@@ -110,18 +110,28 @@ class _BlockInputState extends State<BlockInput> {
         };
       }
 
-      TextInputType textInputType =
+      if(blockInputKeyboardType == BlockInputKeyboardType.mnCyrillic) {
+        _charInputList.add(CharacterInput(
+          textController: textController,
+          focusNode: focusNode,
+          onChange: fx,
+          isCyrillic: true,
+          blockInputStyle: blockInputStyle,
+        ));
+      } else {
+        TextInputType textInputType =
         (blockInputKeyboardType == BlockInputKeyboardType.text) ? TextInputType.text :
         (blockInputKeyboardType == BlockInputKeyboardType.number) ? TextInputType.number : TextInputType.text;
 
-      _charInputList.add(CharacterInput(
-        textController: textController,
-        focusNode: focusNode,
-        onChange: fx,
-        keyboardType: textInputType,
-        blockInputStyle: blockInputStyle,
-      ));
-
+        _charInputList.add(CharacterInput(
+          textController: textController,
+          focusNode: focusNode,
+          onChange: fx,
+          isCyrillic: false,
+          keyboardType: textInputType,
+          blockInputStyle: blockInputStyle,
+        ));
+      }
       _controllerList.add(textController);
       _focusControllerList.add(focusNode);
     }
@@ -154,15 +164,15 @@ class _BlockInputState extends State<BlockInput> {
             mainAxisAlignment: axisAlignment,
             children: _charInputList,
           ),
-          buildErrorMessage(),
+          _buildErrorMessage(this.errorMessage, errorMessageStyle),
         ],
       ),
     );
   }
 
-  Widget buildErrorMessage() {
-    if(errorMessage == null) return SizedBox();
-    return Text(errorMessage, style: errorMessageStyle,);
-  }
+}
 
+Widget _buildErrorMessage(String error, TextStyle errorStyle) {
+  if(error == null) return SizedBox();
+  return Text(error, style: errorStyle.copyWith(),);
 }

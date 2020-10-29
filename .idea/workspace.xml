@@ -3,14 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ba27f609-0ccb-4aa4-8efe-fe8265a44c96" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/block_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/block_input_keyboard_type.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/block_input_keyboard_type.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/input/character_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/input/character_input.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,8 +19,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1gZZSZz0xAjEl66C6xqrGXw2VDG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -32,18 +36,7 @@
       <recent name="$PROJECT_DIR$/lib/input" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -62,12 +55,33 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1107" height="375" key="GridCell.Tab.0.bottom" timestamp="1603964799606">
+      <screen x="0" y="23" width="2048" height="1129" />
+    </state>
+    <state width="1107" height="375" key="GridCell.Tab.0.bottom/0.23.2048.1129@0.23.2048.1129" timestamp="1603964799606" />
+    <state width="1107" height="375" key="GridCell.Tab.0.center" timestamp="1603964799605">
+      <screen x="0" y="23" width="2048" height="1129" />
+    </state>
+    <state width="1107" height="375" key="GridCell.Tab.0.center/0.23.2048.1129@0.23.2048.1129" timestamp="1603964799605" />
+    <state width="1107" height="375" key="GridCell.Tab.0.left" timestamp="1603964799605">
+      <screen x="0" y="23" width="2048" height="1129" />
+    </state>
+    <state width="1107" height="375" key="GridCell.Tab.0.left/0.23.2048.1129@0.23.2048.1129" timestamp="1603964799605" />
+    <state width="1107" height="375" key="GridCell.Tab.0.right" timestamp="1603964799606">
+      <screen x="0" y="23" width="2048" height="1129" />
+    </state>
+    <state width="1107" height="375" key="GridCell.Tab.0.right/0.23.2048.1129@0.23.2048.1129" timestamp="1603964799606" />
+    <state x="504" y="274" width="672" height="678" key="search.everywhere.popup" timestamp="1603962838626">
+      <screen x="0" y="23" width="2048" height="1129" />
+    </state>
+    <state x="504" y="274" width="672" height="678" key="search.everywhere.popup/0.23.2048.1129@0.23.2048.1129" timestamp="1603962838626" />
   </component>
 </project>

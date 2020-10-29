@@ -8,25 +8,29 @@ class CharacterInput extends StatelessWidget {
   final FocusNode focusNode;
   final Function onChange;
   final BlockInputStyle blockInputStyle;
+  final bool isCyrillic;
 
   const CharacterInput({
     Key key,
     @required this.keyboardType,
-    @required this.textController,
     @required this.focusNode,
     @required this.onChange,
-    @required this.blockInputStyle
+    @required this.blockInputStyle,
+    this.isCyrillic = false,
+    this.textController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: blockInputStyle.backgroundColor,
-          borderRadius: blockInputStyle.border.borderRadius
+        color: blockInputStyle.backgroundColor,
+        borderRadius: blockInputStyle.border.borderRadius
       ),
       width: blockInputStyle.width,
       child: TextFormField(
+        readOnly: this.isCyrillic,
+        showCursor: this.isCyrillic,
         textAlign: TextAlign.center,
         obscureText: false,
         style: blockInputStyle.textStyle,
