@@ -98,7 +98,7 @@ class MNKeyboard extends StatelessWidget {
       width: style.width,
       height: style.height,
       child: RaisedButton(
-        color: Colors.blueAccent,
+        color: style.keyColor,
         visualDensity: VisualDensity.compact,
         shape: style.keyShape,
         onPressed: () {
