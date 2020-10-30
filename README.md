@@ -18,8 +18,8 @@ import 'package:block_input/block_input.dart';
 
 ```dart
 BlockInput(
-  blockInputController: blockInputController,
-  blockInputKeyboardType: BlockInputKeyboardType.number, // Number or Text
+  controller: blockInputController,
+  keyboardType: BlockInputKeyboardType.number, // Number or Text
   axisAlignment: MainAxisAlignment.spaceBetween, // Same as Row/Column MainAxisAlignment
   blockInputStyle: BlockInputStyle(
     backgroundColor: Colors.black12, // Color
@@ -33,6 +33,32 @@ BlockInput(
     )
   )
 )
+```
+### Cyrillic support
+Mongolian cyrillic input is **loosely** supported for now. This feature will help you to build Mongolian Registration No input. Cyrillic input triggers custom keyboard layout. Usage:
+
+```dart
+BlockInput(
+  keyboardType: BlockInputKeyboardType.mnCyrillic
+  ...
+)
+```
+Cyrillic keyboard styling:
+```dart
+BlockInputStyle(
+    keyboardStyle: BlockKeyboardStyle(
+      keyColor: Colors.blueAccent,
+      backgroundColor: Colors.white,
+      width: 40,
+      height: 40,
+      textStyle: TextStyle(),
+      keyShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+          side: BorderSide(color: Colors.red)
+      ),
+    ),
+    ...
+),
 ```
 
 ## Controller and Listener
@@ -60,6 +86,7 @@ blockInputController.dispose();
 ```
 
 ## Attributes
+
 ### BlockInput
 | Attribute              | Type                   |
 |------------------------|------------------------|
@@ -70,6 +97,8 @@ blockInputController.dispose();
 | errorMessageStyle      | TextStyle              |
 | axisAlignment          | MainAxisAlignment      |
 
+
+
 ### BlockInputStyle
 | Attribute      | Type               |
 |-----------------|--------------------|
@@ -79,6 +108,9 @@ blockInputController.dispose();
 | padding         | EdgeInsets         |
 | width           | double             |
 | textStyle       | TextStyle          |
+| keyboardStyle   | BlockKeyboardStyle |
+
+
 
 ## Licence
 **Apache License version 2.0**

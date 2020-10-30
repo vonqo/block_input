@@ -1,3 +1,4 @@
+import 'package:block_input/block_keyboard_style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,9 @@ class BlockInputStyle with Diagnosticable {
   final TextStyle textStyle;
   final double width;
   final bool isExtended;
+  final BlockKeyboardStyle keyboardStyle;
 
-  BlockInputStyle({
+  const BlockInputStyle({
     this.backgroundColor = Colors.white,
     this.padding = const EdgeInsets.all(10),
     this.margin = const EdgeInsets.all(5),
@@ -29,7 +31,8 @@ class BlockInputStyle with Diagnosticable {
     this.textStyle = const TextStyle(
       fontSize: 19
     ),
-    this.width = 42
+    this.width = 42,
+    this.keyboardStyle,
   });
 
   BlockInputStyle apply () {

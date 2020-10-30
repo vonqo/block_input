@@ -1,27 +1,30 @@
 import 'package:block_input/block_input_controller.dart';
 import 'package:block_input/block_input_style.dart';
+import 'package:block_input/block_keyboard_style.dart';
 import 'package:block_input/input/character_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 
 import 'block_input_keyboard_type.dart';
+import 'input/mn_keyboard.dart';
 
 class BlockInput extends StatefulWidget {
 
   final String errorMessage;
   final TextStyle errorMessageStyle;
-  final BlockInputController blockInputController;
-  final BlockInputKeyboardType blockInputKeyboardType;
-  final BlockInputStyle blockInputStyle;
+  final BlockInputController controller;
+  final BlockInputKeyboardType keyboardType;
+  final BlockInputStyle style;
   final MainAxisAlignment axisAlignment;
 
   const BlockInput({
     Key key,
     this.errorMessage,
-    this.blockInputKeyboardType = BlockInputKeyboardType.text,
-    this.blockInputStyle,
+    this.keyboardType = BlockInputKeyboardType.text,
+    this.style,
     this.errorMessageStyle,
-    this.blockInputController,
+    this.controller,
     this.axisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
 
@@ -30,9 +33,9 @@ class BlockInput extends StatefulWidget {
     return _BlockInputState(
       errorMessage: errorMessage,
       errorMessageStyle: errorMessageStyle,
-      blockInputKeyboardType: blockInputKeyboardType,
-      blockInputStyle: blockInputStyle,
-      blockInputController: (blockInputController == null) ? BlockInputController(4) : blockInputController,
+      keyboardType: keyboardType,
+      style: style,
+      controller: (controller == null) ? BlockInputController(4) : controller,
       axisAlignment: axisAlignment
     );
   }
@@ -42,20 +45,21 @@ class _BlockInputState extends State<BlockInput> {
 
   final String errorMessage;
   final TextStyle errorMessageStyle;
-  final BlockInputKeyboardType blockInputKeyboardType;
-  final BlockInputStyle blockInputStyle;
-  final BlockInputController blockInputController;
+  final BlockInputKeyboardType keyboardType;
+  final BlockInputStyle style;
+  final BlockInputController controller;
   final MainAxisAlignment axisAlignment;
 
   List<TextEditingController> _controllerList = List<TextEditingController>();
   List<FocusNode> _focusControllerList = List<FocusNode>();
   List<CharacterInput> _charInputList = List<CharacterInput>();
+  bool _isKeyboardShowing = false;
 
   _BlockInputState({
     @required this.errorMessage,
-    @required this.blockInputKeyboardType,
-    @required this.blockInputStyle,
-    this.blockInputController,
+    @required this.keyboardType,
+    @required this.style,
+    this.controller,
     this.errorMessageStyle,
     this.axisAlignment,
   });
@@ -64,64 +68,76 @@ class _BlockInputState extends State<BlockInput> {
   void initState() {
     super.initState();
 
-    blockInputController.addListener(() {
-      String textValue = blockInputController.text;
+    controller.addListener(() {
+      String textValue = controller.text;
       for(int i = 0; i < _controllerList.length; i++) {
         if(textValue.length > i) {
-          _controllerList[i].text = blockInputController.text[i];
+          _controllerList[i].text = controller.text[i];
         } else {
           _controllerList[i].text = '';
         }
       }
-      if(textValue.length == 0) {
-        FocusScope.of(context).requestFocus(_focusControllerList[0]);
-      } else {
-        FocusScope.of(context).requestFocus(_focusControllerList[textValue.length-1]);
+      if(keyboardType != BlockInputKeyboardType.mnCyrillic) {
+        if(textValue.length == 0) {
+          FocusScope.of(context).requestFocus(_focusControllerList[0]);
+        } else {
+          FocusScope.of(context).requestFocus(_focusControllerList[textValue.length-1]);
+        }
       }
     });
 
-    for(int i = 0; i < blockInputController.size; i++) {
+    for(int i = 0; i < controller.size; i++) {
       TextEditingController textController = TextEditingController();
       FocusNode focusNode = FocusNode();
       Function fx = (value) {};
 
-      if(i == 0) {
-        fx = (value) {
-          blockInputController.text = _getText();
-          if(value.length == 1) {
-            FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
+      if(keyboardType == BlockInputKeyboardType.mnCyrillic) {
+        focusNode.addListener(() {
+          if(!_isKeyboardShowing) {
+            _isKeyboardShowing = true;
+            focusNode.unfocus();
+            _buildMNKeyboard(context, style.keyboardStyle, textController, focusNode).show();
           }
-        };
-      } else if(i == blockInputController.size - 1) {
-        fx = (value) {
-          blockInputController.text = _getText();
-          if(value.length == 0) {
-            FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
-          }
-        };
+        });
       } else {
-        fx = (value) {
-          blockInputController.text = _getText();
-          if(value.length == 1) {
-            FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
-          } else if(value.length == 0) {
-            FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
-          }
-        };
+        if(i == 0) {
+          fx = (value) {
+            controller.text = _getText();
+            if(value.length == 1) {
+              FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
+            }
+          };
+        } else if(i == controller.size - 1) {
+          fx = (value) {
+            controller.text = _getText();
+            if(value.length == 0) {
+              FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
+            }
+          };
+        } else {
+          fx = (value) {
+            controller.text = _getText();
+            if(value.length == 1) {
+              FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
+            } else if(value.length == 0) {
+              FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
+            }
+          };
+        }
       }
 
-      if(blockInputKeyboardType == BlockInputKeyboardType.mnCyrillic) {
+      if(keyboardType == BlockInputKeyboardType.mnCyrillic) {
         _charInputList.add(CharacterInput(
           textController: textController,
           focusNode: focusNode,
           onChange: fx,
           isCyrillic: true,
-          blockInputStyle: blockInputStyle,
+          blockInputStyle: style,
         ));
       } else {
         TextInputType textInputType =
-        (blockInputKeyboardType == BlockInputKeyboardType.text) ? TextInputType.text :
-        (blockInputKeyboardType == BlockInputKeyboardType.number) ? TextInputType.number : TextInputType.text;
+        (keyboardType == BlockInputKeyboardType.text) ? TextInputType.text :
+        (keyboardType == BlockInputKeyboardType.number) ? TextInputType.number : TextInputType.text;
 
         _charInputList.add(CharacterInput(
           textController: textController,
@@ -129,7 +145,7 @@ class _BlockInputState extends State<BlockInput> {
           onChange: fx,
           isCyrillic: false,
           keyboardType: textInputType,
-          blockInputStyle: blockInputStyle,
+          blockInputStyle: style,
         ));
       }
       _controllerList.add(textController);
@@ -139,7 +155,7 @@ class _BlockInputState extends State<BlockInput> {
 
   @override
   void dispose() {
-    for(int i = 0; i < blockInputController.size; i++) {
+    for(int i = 0; i < controller.size; i++) {
       _controllerList[i]?.dispose();
       _focusControllerList[i]?.dispose();
     }
@@ -170,7 +186,35 @@ class _BlockInputState extends State<BlockInput> {
     );
   }
 
+  YYDialog _buildMNKeyboard(
+      BuildContext context, BlockKeyboardStyle style,
+      TextEditingController textController, FocusNode focusNode
+    ) {
+    YYDialog dialog = YYDialog();
+    focusNode.unfocus();
+    dialog.build(context)
+      ..width = MediaQuery.of(context).size.width
+      ..gravity = Gravity.bottom
+      ..borderRadius = 12
+      ..backgroundColor = style.backgroundColor
+      ..barrierColor = Color(0x45000000)
+      ..widget(
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 30),
+          child: MNKeyboard(style: style, controller: textController, dialog: dialog,),
+        ),
+      )
+      ..dismissCallBack = () {
+        this.controller.text = _getText();
+        _isKeyboardShowing = false;
+        focusNode.unfocus();
+      };
+    focusNode.unfocus();
+    return dialog;
+  }
 }
+
+
 
 Widget _buildErrorMessage(String error, TextStyle errorStyle) {
   if(error == null) return SizedBox();

@@ -26,9 +26,9 @@ void main() {
 
     BlockInputController controller = BlockInputController(6);
     Widget blockInput = BlockInput(
-      blockInputController: controller,
-      blockInputKeyboardType: BlockInputKeyboardType.number,
-      blockInputStyle: BlockInputStyle(
+      controller: controller,
+      keyboardType: BlockInputKeyboardType.number,
+      style: BlockInputStyle(
           backgroundColor: Colors.black12,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
