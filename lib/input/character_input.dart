@@ -34,6 +34,7 @@ class CharacterInput extends StatelessWidget {
         textAlign: TextAlign.center,
         obscureText: false,
         style: blockInputStyle.textStyle,
+        keyboardType: keyboardType,
         maxLength: 1,
         enabled: true,
         decoration: InputDecoration(

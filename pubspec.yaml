@@ -1,6 +1,6 @@
 name: block_input
 description: Simple character blocked input that usually used for redeem code or validation code input.
-version: 1.2.1
+version: 1.2.2
 author: vonqo
 homepage: https://github.com/vonqo/block_input
 
