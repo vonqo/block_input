@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 class BlockInputController extends ValueNotifier<BlockEditingValue> {
 
-  BlockInputController(this.size, {String text})
+  BlockInputController(this.size, {String? text})
       : super(text == null ? BlockEditingValue.empty : BlockEditingValue(text: text));
 
   final int size;
@@ -34,7 +34,7 @@ class BlockEditingValue {
     this.text = ''
   }) : assert(text != null);
 
-  BlockEditingValue copyWith({String text}) {
+  BlockEditingValue copyWith({String? text}) {
     return BlockEditingValue(text: text ?? this.text);
   }
 

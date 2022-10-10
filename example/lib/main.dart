@@ -66,12 +66,12 @@ class _MyAppState extends State<MyApp> {
                       style: BlockInputStyle(
                           backgroundColor: Colors.black12,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.deepOrange, width: 1)
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.deepOrange, width: 1)
                           ),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.blueAccent, width: 2)
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.blueAccent, width: 2)
                           )
                       ),
                     ),

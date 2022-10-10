@@ -11,20 +11,20 @@ import 'input/mn_keyboard.dart';
 
 class BlockInput extends StatefulWidget {
 
-  final String errorMessage;
-  final TextStyle errorMessageStyle;
+  final String? errorMessage;
+  final TextStyle? errorMessageStyle;
   final BlockInputController controller;
-  final BlockInputKeyboardType keyboardType;
-  final BlockInputStyle style;
-  final MainAxisAlignment axisAlignment;
+  final BlockInputKeyboardType? keyboardType;
+  final BlockInputStyle? style;
+  final MainAxisAlignment? axisAlignment;
 
   const BlockInput({
-    Key key,
+    Key? key,
     this.errorMessage,
     this.keyboardType = BlockInputKeyboardType.text,
     this.style,
     this.errorMessageStyle,
-    this.controller,
+    required this.controller,
     this.axisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
 
@@ -43,23 +43,23 @@ class BlockInput extends StatefulWidget {
 
 class _BlockInputState extends State<BlockInput> {
 
-  final String errorMessage;
-  final TextStyle errorMessageStyle;
-  final BlockInputKeyboardType keyboardType;
-  final BlockInputStyle style;
+  final String? errorMessage;
+  final TextStyle? errorMessageStyle;
+  final BlockInputKeyboardType? keyboardType;
+  final BlockInputStyle? style;
   final BlockInputController controller;
-  final MainAxisAlignment axisAlignment;
+  final MainAxisAlignment? axisAlignment;
 
-  List<TextEditingController> _controllerList = List<TextEditingController>();
-  List<FocusNode> _focusControllerList = List<FocusNode>();
-  List<CharacterInput> _charInputList = List<CharacterInput>();
+  List<TextEditingController> _controllerList = [];
+  List<FocusNode> _focusControllerList = [];
+  List<CharacterInput> _charInputList = [];
   bool _isKeyboardShowing = false;
 
   _BlockInputState({
     @required this.errorMessage,
     @required this.keyboardType,
     @required this.style,
-    this.controller,
+    required this.controller,
     this.errorMessageStyle,
     this.axisAlignment,
   });
@@ -70,11 +70,12 @@ class _BlockInputState extends State<BlockInput> {
 
     controller.addListener(() {
       String textValue = controller.text;
+
       for(int i = 0; i < _controllerList.length; i++) {
         if(textValue.length > i) {
           _controllerList[i].text = controller.text[i];
         } else {
-          _controllerList[i].text = '';
+          _controllerList[i].text = ' ';
         }
       }
       if(keyboardType != BlockInputKeyboardType.mnCyrillic) {
@@ -89,51 +90,66 @@ class _BlockInputState extends State<BlockInput> {
     for(int i = 0; i < controller.size; i++) {
       TextEditingController textController = TextEditingController();
       FocusNode focusNode = FocusNode();
-      Function fx = (value) {};
+      void Function(String) fx = (value) {};
 
       if(keyboardType == BlockInputKeyboardType.mnCyrillic) {
         focusNode.addListener(() {
           if(!_isKeyboardShowing) {
             _isKeyboardShowing = true;
             focusNode.unfocus();
-            _buildMNKeyboard(context, style.keyboardStyle, textController, focusNode).show();
+            _buildMNKeyboard(
+                context,
+                style?.keyboardStyle ?? BlockKeyboardStyle(),
+                textController,
+                focusNode
+            ).show();
           }
         });
       } else {
+
+        // First Block
         if(i == 0) {
           fx = (value) {
             controller.text = _getText();
-            if(value.length == 1) {
+            if(value != ' ') {
               FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
             }
           };
+
+        // Last Block
         } else if(i == controller.size - 1) {
           fx = (value) {
             controller.text = _getText();
-            if(value.length == 0) {
+            if(value == ' ') {
               FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
             }
           };
+
+        // Middle Blocks
         } else {
           fx = (value) {
             controller.text = _getText();
-            if(value.length == 1) {
+            if(value != ' ') {
               FocusScope.of(context).requestFocus(_focusControllerList[i+1]);
-            } else if(value.length == 0) {
+            } else if(value == ' ') {
               FocusScope.of(context).requestFocus(_focusControllerList[i-1]);
             }
           };
         }
       }
 
+      // If keyboard is cyrillic
       if(keyboardType == BlockInputKeyboardType.mnCyrillic) {
         _charInputList.add(CharacterInput(
+          keyboardType: TextInputType.number,
           textController: textController,
           focusNode: focusNode,
           onChange: fx,
           isCyrillic: true,
           blockInputStyle: style,
         ));
+
+      // If keyboard is number or text
       } else {
         TextInputType textInputType =
         (keyboardType == BlockInputKeyboardType.text) ? TextInputType.text :
@@ -177,7 +193,7 @@ class _BlockInputState extends State<BlockInput> {
         children: [
           Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: axisAlignment,
+            mainAxisAlignment: axisAlignment ?? MainAxisAlignment.spaceBetween,
             children: _charInputList,
           ),
           _buildErrorMessage(this.errorMessage, errorMessageStyle),
@@ -196,7 +212,7 @@ class _BlockInputState extends State<BlockInput> {
       ..width = MediaQuery.of(context).size.width
       ..gravity = Gravity.bottom
       ..borderRadius = 12
-      ..backgroundColor = style.backgroundColor
+      ..backgroundColor = style.backgroundColor ?? Colors.white70
       ..barrierColor = Color(0x45000000)
       ..widget(
         Container(
@@ -216,7 +232,7 @@ class _BlockInputState extends State<BlockInput> {
 
 
 
-Widget _buildErrorMessage(String error, TextStyle errorStyle) {
+Widget _buildErrorMessage(String? error, TextStyle? errorStyle) {
   if(error == null) return SizedBox();
-  return Text(error, style: errorStyle.copyWith(),);
+  return Text(error, style: errorStyle?.copyWith(),);
 }

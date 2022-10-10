@@ -9,10 +9,10 @@ class MNKeyboard extends StatelessWidget {
   final YYDialog dialog;
 
   const MNKeyboard({
-    Key key,
-    this.style,
-    this.controller,
-    this.dialog
+    Key? key,
+    required this.style,
+    required this.controller,
+    required this.dialog
   }) : super(key: key);
 
   @override
@@ -59,7 +59,6 @@ class MNKeyboard extends StatelessWidget {
             _buildKey('Р'),
             _buildKey('С'),
             _buildKey('Т'),
-
           ],
         ),
         SizedBox(height: 10,),
@@ -74,7 +73,6 @@ class MNKeyboard extends StatelessWidget {
             _buildKey('Ц'),
             _buildKey('Ч'),
             _buildKey('Ш'),
-
           ],
         ),
         SizedBox(height: 10,),
@@ -83,13 +81,42 @@ class MNKeyboard extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             _buildKey('Щ'),
+            _buildKey('Ъ'),
             _buildKey('Ы'),
+            _buildKey('Ь'),
             _buildKey('Э'),
             _buildKey('Ю'),
             _buildKey('Я'),
           ],
         ),
+        SizedBox(height: 10,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            _buildRemove(),
+          ],
+        )
       ],
+    );
+  }
+
+  Widget _buildRemove() {
+    String char = 'Арилгах';
+    return Container(
+      height: style.height,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: style.keyShape as OutlinedBorder,
+          primary: style.keyColor,
+          visualDensity: VisualDensity.compact,
+        ),
+        onPressed: () {
+          dialog.dismiss();
+          controller.clear();
+        },
+        child: Text(char, style: style.textStyle,),
+      ),
     );
   }
 
@@ -97,10 +124,12 @@ class MNKeyboard extends StatelessWidget {
     return Container(
       width: style.width,
       height: style.height,
-      child: RaisedButton(
-        color: style.keyColor,
-        visualDensity: VisualDensity.compact,
-        shape: style.keyShape,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: style.keyShape as OutlinedBorder,
+          primary: style.keyColor,
+          visualDensity: VisualDensity.compact,
+        ),
         onPressed: () {
           dialog.dismiss();
           controller.text = char;

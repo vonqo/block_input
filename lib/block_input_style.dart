@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 @immutable
 class BlockInputStyle with Diagnosticable {
 
-  final Color backgroundColor;
-  final OutlineInputBorder border;
-  final OutlineInputBorder focusedBorder;
-  final EdgeInsets padding;
-  final EdgeInsets margin;
-  final TextStyle textStyle;
-  final double width;
-  final bool isExtended;
-  final BlockKeyboardStyle keyboardStyle;
+  final Color? backgroundColor;
+  final InputBorder? border;
+  final InputBorder? focusedBorder;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
+  final TextStyle? textStyle;
+  final double? width;
+  final bool? isExtended;
+  final BlockKeyboardStyle? keyboardStyle;
 
   const BlockInputStyle({
     this.backgroundColor = Colors.white,

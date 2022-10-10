@@ -3,12 +3,12 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class BlockKeyboardStyle with Diagnosticable {
-  final TextStyle textStyle;
-  final Color keyColor;
-  final Color backgroundColor;
-  final ShapeBorder keyShape;
-  final double width;
-  final double height;
+  final TextStyle? textStyle;
+  final Color? keyColor;
+  final Color? backgroundColor;
+  final ShapeBorder? keyShape;
+  final double? width;
+  final double? height;
 
   const BlockKeyboardStyle({
     this.textStyle,
